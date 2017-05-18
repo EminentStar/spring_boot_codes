@@ -1,0 +1,39 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.3.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") // 스프링 부트 플러그인 의존성
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot' // 스프링 부트 플러그인 적용
+
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	/*
+	// 전이적 의존성에서 jackson을 제외하는 경우
+	compile('org.springframework.boot:spring-boot-starter-web'){
+		exclude group: 'com.fasterxml.jackson.core'
+	}
+	// 더 나중에 나온 Jackson 버전을 지정하고 싶을때
+	compile('com.fasterxml.jackson.core:jackson-datbind:2.4.3')
+	*/
+	runtime('com.h2database:h2')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
